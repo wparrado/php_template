@@ -103,14 +103,14 @@ jobs:
         run: cp .env.example .env && php artisan key:generate
 
       - name: Run unit tests
-        run: vendor/bin/pest --group=unit -- --coverage-xml=coverage.xml
+        run: vendor/bin/pest --group=unit
         env:
           APP_ENV: testing
           DB_BACKEND: memory
           EVENT_PUBLISHER: sync
 
       - name: Run architecture tests
-        run: vendor/bin/pest tests/Architecture --group=architecture -- --coverage-xml=coverage-arch.xml
+        run: vendor/bin/pest tests/Architecture --group=architecture
         env:
           APP_ENV: testing
           DB_BACKEND: memory
