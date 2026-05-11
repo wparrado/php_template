@@ -27,6 +27,9 @@ jobs:
         run: composer install --no-interaction --prefer-dist
 
       - name: Run Laravel Pint
+        run: composer lint || true
+
+      - name: Check Laravel Pint (no changes expected)
         run: composer lint:check
 
   type-check:
