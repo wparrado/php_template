@@ -72,8 +72,8 @@ final class CategoryController extends Controller
         $validated = $request->validated();
 
         $result = $this->service->create(new CreateCategoryCommand(
-            name: $validated['name'],
-            description: $validated['description'] ?? null,
+            name: (string) $validated['name'],
+            description: isset($validated['description']) ? (string) $validated['description'] : null,
         ));
 
         if ($result instanceof Failure) {
@@ -92,8 +92,8 @@ final class CategoryController extends Controller
 
         $result = $this->service->update(new UpdateCategoryCommand(
             categoryId: $id,
-            name: $validated['name'],
-            description: $validated['description'] ?? null,
+            name: (string) $validated['name'],
+            description: isset($validated['description']) ? (string) $validated['description'] : null,
         ));
 
         if ($result instanceof Failure) {

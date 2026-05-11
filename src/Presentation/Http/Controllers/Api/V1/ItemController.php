@@ -73,11 +73,11 @@ final class ItemController extends Controller
         $validated = $request->validated();
 
         $result = $this->service->create(new CreateItemCommand(
-            name: $validated['name'],
+            name: (string) $validated['name'],
             price: (float) $validated['price'],
-            currency: $validated['currency'] ?? 'USD',
-            description: $validated['description'] ?? null,
-            categoryId: $validated['category_id'] ?? null,
+            currency: (string) ($validated['currency'] ?? 'USD'),
+            description: isset($validated['description']) ? (string) $validated['description'] : null,
+            categoryId: isset($validated['category_id']) ? (string) $validated['category_id'] : null,
         ));
 
         if ($result instanceof Failure) {
@@ -96,11 +96,11 @@ final class ItemController extends Controller
 
         $result = $this->service->update(new UpdateItemCommand(
             itemId: $id,
-            name: $validated['name'],
+            name: (string) $validated['name'],
             price: (float) $validated['price'],
-            currency: $validated['currency'] ?? 'USD',
-            description: $validated['description'] ?? null,
-            categoryId: $validated['category_id'] ?? null,
+            currency: (string) ($validated['currency'] ?? 'USD'),
+            description: isset($validated['description']) ? (string) $validated['description'] : null,
+            categoryId: isset($validated['category_id']) ? (string) $validated['category_id'] : null,
         ));
 
         if ($result instanceof Failure) {
