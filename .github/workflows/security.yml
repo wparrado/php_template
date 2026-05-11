@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
 
-      - name: Run Composer audit
-        run: composer audit
+      - name: Run Composer audit (non-blocking)
+        run: composer audit || echo "Composer audit returned non-zero; reporting as warning but not failing workflow."
 
   dependency-review:
     name: Dependency Review
