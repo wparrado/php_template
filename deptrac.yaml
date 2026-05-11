@@ -1,0 +1,35 @@
+parameters:
+  paths:
+    - ./src
+  exclude_files: []
+
+  layers:
+    - name: Domain
+      collectors:
+        - type: className
+          regex: ^Domain\\.*
+    - name: Application
+      collectors:
+        - type: className
+          regex: ^Application\\.*
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: ^Infrastructure\\.*
+    - name: Presentation
+      collectors:
+        - type: className
+          regex: ^Presentation\\.*
+
+  ruleset:
+    Domain: []              # Domain imports nothing from other layers
+    Application:
+      - Domain
+    Infrastructure:
+      - Domain
+      - Application
+    Presentation:
+      - Application
+      - Infrastructure
+
+  skip_violations: []

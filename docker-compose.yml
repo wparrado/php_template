@@ -1,0 +1,65 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_KEY: ${APP_KEY:-base64:placeholder==}
+      DB_BACKEND: ${DB_BACKEND:-memory}
+      EVENT_PUBLISHER: ${EVENT_PUBLISHER:-sync}
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE:-php_template}
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-secret}
+    depends_on:
+      - postgres
+    profiles:
+      - postgres
+    networks:
+      - app-network
+
+  app-memory:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_KEY: ${APP_KEY:-base64:placeholder==}
+      DB_BACKEND: memory
+      EVENT_PUBLISHER: sync
+    profiles:
+      - ""
+      - default
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-php_template}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    profiles:
+      - postgres
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
