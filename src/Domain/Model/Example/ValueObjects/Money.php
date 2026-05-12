@@ -10,6 +10,7 @@ use Domain\Model\ValueObject;
 final class Money extends ValueObject
 {
     private readonly float $amount;
+
     private readonly string $currency;
 
     public function __construct(float $amount, string $currency = 'USD')

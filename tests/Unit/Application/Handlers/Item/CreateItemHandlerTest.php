@@ -8,20 +8,20 @@ use Application\Handlers\Item\CreateItemHandler;
 use Application\Mappers\ItemMapper;
 use Application\Result\Failure;
 use Application\Result\Success;
-use Domain\Model\Example\Events\ItemCreated;
+use Illuminate\Events\Dispatcher;
 use Infrastructure\Clock\FakeClock;
 use Infrastructure\Events\SyncEventPublisher;
 use Infrastructure\Persistence\InMemory\InMemoryItemRepository;
 use Infrastructure\Persistence\InMemory\InMemoryUnitOfWork;
 
 beforeEach(function (): void {
-    $this->repository = new InMemoryItemRepository();
-    $this->uow = new InMemoryUnitOfWork();
-    $this->clock = new FakeClock(new \DateTimeImmutable('2024-06-01T00:00:00Z'));
+    $this->repository = new InMemoryItemRepository;
+    $this->uow = new InMemoryUnitOfWork;
+    $this->clock = new FakeClock(new DateTimeImmutable('2024-06-01T00:00:00Z'));
     $this->publishedEvents = [];
 
     // Capture published events for assertion
-    $dispatcher = new \Illuminate\Events\Dispatcher();
+    $dispatcher = new Dispatcher;
     $this->eventPublisher = new SyncEventPublisher($dispatcher);
 
     $this->handler = new CreateItemHandler(
@@ -29,7 +29,7 @@ beforeEach(function (): void {
         eventPublisher: $this->eventPublisher,
         uow: $this->uow,
         clock: $this->clock,
-        mapper: new ItemMapper(),
+        mapper: new ItemMapper,
     );
 });
 

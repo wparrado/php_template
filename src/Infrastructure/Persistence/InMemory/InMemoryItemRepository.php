@@ -29,7 +29,7 @@ final class InMemoryItemRepository implements ItemRepositoryInterface
     {
         $active = array_filter(
             array_values($this->items),
-            fn (Item $item) => !$item->isDeleted()
+            fn (Item $item) => ! $item->isDeleted()
         );
 
         // Sort by createdAt desc
@@ -47,7 +47,7 @@ final class InMemoryItemRepository implements ItemRepositoryInterface
     {
         return count(array_filter(
             $this->items,
-            fn (Item $item) => !$item->isDeleted()
+            fn (Item $item) => ! $item->isDeleted()
         ));
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Application\Handlers\Item;
 
 use Application\Commands\Item\CreateItemCommand;
-use Application\DTOs\ItemOutputDTO;
 use Application\Mappers\ItemMapper;
 use Application\Ports\UnitOfWorkInterface;
 use Application\Result\Failure;

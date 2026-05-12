@@ -7,7 +7,7 @@ namespace Application\DTOs;
 final readonly class PaginationDTO
 {
     /**
-     * @param array<mixed> $items
+     * @param  array<mixed>  $items
      */
     public function __construct(
         public array $items,

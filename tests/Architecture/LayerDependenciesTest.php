@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use Phparkitect\Architecture\Architecture;
-use Phparkitect\ClassSet;
-use Phparkitect\Rules\ArchRule;
 use Phparkitect\Phparkitect;
 
 /**
@@ -13,7 +11,6 @@ use Phparkitect\Phparkitect;
  *
  * These tests mirror the layer dependency rules enforced by deptrac.
  */
-
 it('Domain classes must not depend on Application', function (): void {
     // Verified by phparkitect -- this test documents the rule
     expect(true)->toBeTrue();

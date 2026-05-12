@@ -11,11 +11,11 @@ use Infrastructure\Persistence\InMemory\InMemoryCategoryRepository;
  * Contract test: runs the same assertions against EVERY CategoryRepository implementation.
  */
 dataset('category repositories', [
-    'InMemory' => fn () => new InMemoryCategoryRepository(),
+    'InMemory' => fn () => new InMemoryCategoryRepository,
 ]);
 
 beforeEach(function (): void {
-    $this->clock = new FakeClock(new \DateTimeImmutable('2024-01-01T00:00:00Z'));
+    $this->clock = new FakeClock(new DateTimeImmutable('2024-01-01T00:00:00Z'));
 });
 
 function makeCategory(FakeClock $clock, string $name = 'Electronics'): Category

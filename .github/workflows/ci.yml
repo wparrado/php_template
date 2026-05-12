@@ -32,7 +32,6 @@ jobs:
   type-check:
     name: Type Check (PHPStan)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -49,7 +48,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-scripts && php artisan package:discover --ansi
 
       - name: Run PHPStan
-        run: composer stan
+        run: vendor/bin/phpstan analyse --memory-limit=1G -c phpstan.neon src tests
 
   architecture:
     name: Architecture (Deptrac + PHPArkitect)
@@ -70,10 +69,10 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-scripts && php artisan package:discover --ansi
 
       - name: Run Deptrac
-        run: composer deptrac
+        run: vendor/bin/deptrac analyse
 
       - name: Run PHPArkitect
-        run: composer arkitect
+        run: vendor/bin/phparkitect analyze
 
   test:
     name: Tests (PHP ${{ matrix.php }})

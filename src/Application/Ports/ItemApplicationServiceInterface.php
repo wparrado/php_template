@@ -7,8 +7,6 @@ namespace Application\Ports;
 use Application\Commands\Item\CreateItemCommand;
 use Application\Commands\Item\DeleteItemCommand;
 use Application\Commands\Item\UpdateItemCommand;
-use Application\DTOs\ItemOutputDTO;
-use Application\DTOs\PaginationDTO;
 use Application\Queries\Item\GetItemQuery;
 use Application\Queries\Item\ListItemsQuery;
 use Application\Result\Result;

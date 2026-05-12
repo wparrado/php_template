@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Phparkitect\Architecture\Architecture;
 use Phparkitect\ClassSet;
-use Phparkitect\Rules\ArchRule;
 use Phparkitect\Phparkitect;
+use Phparkitect\Rules\ArchRule;
 
 return static function (Phparkitect $phparkitect): void {
     $classSet = ClassSet::fromDir(__DIR__ . '/src');

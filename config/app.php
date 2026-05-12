@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
+use Infrastructure\Providers\AppServiceProvider;
 
 return [
     'name' => env('APP_NAME', 'PHP Hexagonal Template'),
@@ -27,7 +28,7 @@ return [
         'driver' => 'file',
     ],
 
-    'providers' => \Illuminate\Support\ServiceProvider::defaultProviders()->merge([
-        \Infrastructure\Providers\AppServiceProvider::class,
+    'providers' => ServiceProvider::defaultProviders()->merge([
+        AppServiceProvider::class,
     ])->toArray(),
 ];

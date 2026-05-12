@@ -8,7 +8,7 @@ use Domain\Model\Example\Events\CategoryCreated;
 use Infrastructure\Clock\FakeClock;
 
 beforeEach(function (): void {
-    $this->clock = new FakeClock(new \DateTimeImmutable('2024-06-01T10:00:00Z'));
+    $this->clock = new FakeClock(new DateTimeImmutable('2024-06-01T10:00:00Z'));
 });
 
 describe('Category::create()', function (): void {

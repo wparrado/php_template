@@ -21,7 +21,7 @@ final class CategoryMapper
     }
 
     /**
-     * @param Category[] $categories
+     * @param  Category[]  $categories
      * @return CategoryOutputDTO[]
      */
     public function toDTOList(array $categories): array

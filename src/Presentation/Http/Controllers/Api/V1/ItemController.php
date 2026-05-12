@@ -13,7 +13,6 @@ use Application\Ports\ItemApplicationServiceInterface;
 use Application\Queries\Item\GetItemQuery;
 use Application\Queries\Item\ListItemsQuery;
 use Application\Result\Failure;
-use Application\Result\Success;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Presentation\Http\Requests\Item\CreateItemRequest;

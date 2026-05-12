@@ -9,7 +9,7 @@ use Domain\Events\DomainEvent;
 interface EventPublisherInterface
 {
     /**
-     * @param DomainEvent[] $events
+     * @param  DomainEvent[]  $events
      */
     public function publish(array $events): void;
 }

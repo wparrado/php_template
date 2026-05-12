@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 final class DatabaseOutboxEventPublisher implements EventPublisherInterface
 {
     /**
-     * @param DomainEvent[] $events
+     * @param  DomainEvent[]  $events
      */
     public function publish(array $events): void
     {

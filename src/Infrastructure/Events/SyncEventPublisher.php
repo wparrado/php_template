@@ -15,7 +15,7 @@ final class SyncEventPublisher implements EventPublisherInterface
     ) {}
 
     /**
-     * @param DomainEvent[] $events
+     * @param  DomainEvent[]  $events
      */
     public function publish(array $events): void
     {

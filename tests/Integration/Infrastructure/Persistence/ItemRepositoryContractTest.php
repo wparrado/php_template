@@ -12,11 +12,11 @@ use Infrastructure\Persistence\InMemory\InMemoryItemRepository;
  * Add new implementations to the dataset to automatically extend coverage.
  */
 dataset('item repositories', [
-    'InMemory' => fn () => new InMemoryItemRepository(),
+    'InMemory' => fn () => new InMemoryItemRepository,
 ]);
 
 beforeEach(function (): void {
-    $this->clock = new FakeClock(new \DateTimeImmutable('2024-01-01T00:00:00Z'));
+    $this->clock = new FakeClock(new DateTimeImmutable('2024-01-01T00:00:00Z'));
 });
 
 function makeItem(FakeClock $clock, string $name = 'Test Item', float $price = 9.99): Item

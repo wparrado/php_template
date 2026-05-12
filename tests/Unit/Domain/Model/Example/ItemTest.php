@@ -10,7 +10,7 @@ use Domain\Model\Example\Item;
 use Infrastructure\Clock\FakeClock;
 
 beforeEach(function (): void {
-    $this->clock = new FakeClock(new \DateTimeImmutable('2024-06-01T10:00:00Z'));
+    $this->clock = new FakeClock(new DateTimeImmutable('2024-06-01T10:00:00Z'));
 });
 
 describe('Item::create()', function (): void {
@@ -73,7 +73,7 @@ describe('Item::update()', function (): void {
         $item = Item::create('Old Name', 5.0, 'USD', 'old desc', null, $this->clock->now());
         $item->collectEvents(); // clear creation event
 
-        $this->clock->advance(new \DateInterval('PT1H'));
+        $this->clock->advance(new DateInterval('PT1H'));
 
         $item->update(
             name: 'New Name',

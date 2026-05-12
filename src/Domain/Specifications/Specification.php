@@ -10,7 +10,8 @@ abstract class Specification
 
     public function and(self $other): self
     {
-        return new class($this, $other) extends Specification {
+        return new class($this, $other) extends Specification
+        {
             public function __construct(
                 private readonly Specification $left,
                 private readonly Specification $right,
@@ -26,7 +27,8 @@ abstract class Specification
 
     public function or(self $other): self
     {
-        return new class($this, $other) extends Specification {
+        return new class($this, $other) extends Specification
+        {
             public function __construct(
                 private readonly Specification $left,
                 private readonly Specification $right,
@@ -42,14 +44,15 @@ abstract class Specification
 
     public function not(): self
     {
-        return new class($this) extends Specification {
+        return new class($this) extends Specification
+        {
             public function __construct(
                 private readonly Specification $inner,
             ) {}
 
             public function isSatisfiedBy(mixed $candidate): bool
             {
-                return !$this->inner->isSatisfiedBy($candidate);
+                return ! $this->inner->isSatisfiedBy($candidate);
             }
         };
     }

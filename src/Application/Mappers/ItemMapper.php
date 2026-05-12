@@ -24,7 +24,7 @@ final class ItemMapper
     }
 
     /**
-     * @param Item[] $items
+     * @param  Item[]  $items
      * @return ItemOutputDTO[]
      */
     public function toDTOList(array $items): array

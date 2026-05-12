@@ -11,13 +11,14 @@ use Ramsey\Uuid\UuidInterface;
 abstract class DomainEvent
 {
     private readonly UuidInterface $eventId;
+
     private readonly DateTimeImmutable $occurredAt;
 
     public function __construct(
         public readonly string $aggregateId,
     ) {
         $this->eventId = Uuid::uuid4();
-        $this->occurredAt = new DateTimeImmutable();
+        $this->occurredAt = new DateTimeImmutable;
     }
 
     public function getEventId(): UuidInterface
