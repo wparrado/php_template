@@ -72,12 +72,12 @@ jobs:
         run: vendor/bin/deptrac analyse
 
       - name: Run PHPArkitect
-        run: vendor/bin/phparkitect analyze
+        run: composer arkitect
 
   test:
     name: Tests (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
-    continue-on-error: true
+    continue-on-error: false
     strategy:
       matrix:
         php: ['8.3', '8.4']
@@ -100,14 +100,14 @@ jobs:
         run: cp .env.example .env && php artisan key:generate
 
       - name: Run unit tests
-        run: vendor/bin/pest --group=unit
+        run: composer test:unit
         env:
           APP_ENV: testing
           DB_BACKEND: memory
           EVENT_PUBLISHER: sync
 
       - name: Run architecture tests
-        run: vendor/bin/pest tests/Architecture --group=architecture
+        run: composer test:arch
         env:
           APP_ENV: testing
           DB_BACKEND: memory
