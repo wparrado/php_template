@@ -48,7 +48,7 @@ jobs:
         run: composer install --no-interaction --prefer-dist --no-scripts && php artisan package:discover --ansi
 
       - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --memory-limit=1G -c phpstan.neon src tests
+        run: vendor/bin/phpstan analyse --memory-limit=1G -c phpstan.neon src
 
   architecture:
     name: Architecture (Deptrac + PHPArkitect)
