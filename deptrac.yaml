@@ -7,19 +7,19 @@ parameters:
     - name: Domain
       collectors:
         - type: classNameRegex
-          regex: ^Domain\\\\.*
+          value: '/^Domain\\\\.*/'
     - name: Application
       collectors:
         - type: classNameRegex
-          regex: ^Application\\\\.*
+          value: '/^Application\\\\.*/'
     - name: Infrastructure
       collectors:
         - type: classNameRegex
-          regex: ^Infrastructure\\\\.*
+          value: '/^Infrastructure\\\\.*/'
     - name: Presentation
       collectors:
         - type: classNameRegex
-          regex: ^Presentation\\\\.*
+          value: '/^Presentation\\\\.*/'
 
   ruleset:
     Domain: []              # Domain imports nothing from other layers
