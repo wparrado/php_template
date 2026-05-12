@@ -7,7 +7,7 @@ namespace Application\Result;
 final class Success extends Result
 {
     public function __construct(
-        public readonly mixed $value,
+        public mixed $value,
     ) {}
 
     public function isSuccess(): bool

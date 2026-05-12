@@ -7,7 +7,7 @@ namespace Application\Result;
 final class Failure extends Result
 {
     public function __construct(
-        public readonly \Throwable $error,
+        public \Throwable $error,
     ) {}
 
     public function isSuccess(): bool
