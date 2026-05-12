@@ -24,4 +24,9 @@ final readonly class Failure extends Result
     {
         return $this->error;
     }
+
+    public function getValue(): mixed
+    {
+        return null;
+    }
 }

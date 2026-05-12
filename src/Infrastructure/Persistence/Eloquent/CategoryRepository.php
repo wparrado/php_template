@@ -62,9 +62,9 @@ final class CategoryRepository implements CategoryRepositoryInterface
         return Category::reconstitute(
             id: (string) $model->getAttribute('id'),
             name: (string) $model->getAttribute('name'),
-            description: $model->getAttribute('description'),
-            createdAt: new \DateTimeImmutable($model->getAttribute('created_at')->toDateTimeString()),
-            updatedAt: new \DateTimeImmutable($model->getAttribute('updated_at')->toDateTimeString()),
+            description: $model->getAttribute('description') !== null ? (string) $model->getAttribute('description') : null,
+            createdAt: new \DateTimeImmutable((string) $model->getAttribute('created_at')),
+            updatedAt: new \DateTimeImmutable((string) $model->getAttribute('updated_at')),
         );
     }
 }

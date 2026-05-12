@@ -41,7 +41,7 @@ final class CategoryController extends Controller
 
         return new JsonResponse([
             'data' => array_map(
-                fn (CategoryOutputDTO $dto) => (new CategoryResource($dto))->toArray(request()),
+                fn ($dto) => (new CategoryResource($dto))->toArray(request()),
                 $pagination->items
             ),
             'meta' => [

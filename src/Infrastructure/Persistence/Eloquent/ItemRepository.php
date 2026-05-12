@@ -69,10 +69,10 @@ final class ItemRepository implements ItemRepositoryInterface
             name: (string) $model->getAttribute('name'),
             price: (float) $model->getAttribute('price'),
             currency: (string) $model->getAttribute('currency'),
-            description: $model->getAttribute('description'),
-            categoryId: $model->getAttribute('category_id'),
-            createdAt: new \DateTimeImmutable($model->getAttribute('created_at')->toDateTimeString()),
-            updatedAt: new \DateTimeImmutable($model->getAttribute('updated_at')->toDateTimeString()),
+            description: $model->getAttribute('description') !== null ? (string) $model->getAttribute('description') : null,
+            categoryId: $model->getAttribute('category_id') !== null ? (string) $model->getAttribute('category_id') : null,
+            createdAt: new \DateTimeImmutable((string) $model->getAttribute('created_at')),
+            updatedAt: new \DateTimeImmutable((string) $model->getAttribute('updated_at')),
             deleted: (bool) $model->getAttribute('is_deleted'),
         );
     }

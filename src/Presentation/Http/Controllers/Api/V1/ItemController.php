@@ -41,7 +41,7 @@ final class ItemController extends Controller
 
         return new JsonResponse([
             'data' => array_map(
-                fn (ItemOutputDTO $dto) => (new ItemResource($dto))->toArray(request()),
+                fn ($dto) => (new ItemResource($dto))->toArray(request()),
                 $pagination->items
             ),
             'meta' => [
