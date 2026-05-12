@@ -13,10 +13,8 @@ parameters:
 
     ignoreErrors:
         - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Builder#'
+        - '#Access to an undefined property PHPUnit\\\\Framework\\\\TestCase#'
 
     stubFiles:
         - tests/phpstan-stub.php
-
-    ignoreErrors:
-        - '#Access to an undefined property PHPUnit\\\\Framework\\\\TestCase#'
 
