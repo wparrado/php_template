@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Result;
 
-final readonly class Success extends Result
+final class Success extends Result
 {
     public function __construct(
         public readonly mixed $value,

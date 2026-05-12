@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Result;
 
-final readonly class Failure extends Result
+final class Failure extends Result
 {
     public function __construct(
         public readonly \Throwable $error,
