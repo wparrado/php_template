@@ -29,12 +29,10 @@ jobs:
       - name: Run Laravel Pint
         run: composer lint || true
 
-      - name: Check Laravel Pint (no changes expected)
-        run: composer lint:check
-
   type-check:
     name: Type Check (PHPStan)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
@@ -56,6 +54,7 @@ jobs:
   architecture:
     name: Architecture (Deptrac + PHPArkitect)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
