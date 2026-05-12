@@ -16,3 +16,7 @@ parameters:
 
     stubFiles:
         - tests/phpstan-stub.php
+
+    ignoreErrors:
+        - '#Access to an undefined property PHPUnit\\\\Framework\\\\TestCase#'
+
