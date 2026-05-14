@@ -1,221 +1,41 @@
 # PHP Laravel 11 — Hexagonal Architecture Template
 
-A production-ready Laravel 11 template implementing **Hexagonal Architecture** (Ports & Adapters) with CQRS, Domain-Driven Design, and a full quality toolchain.
+Minimal steps to run the project locally:
 
-## Architecture Overview
+1. Clone the repository:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Presentation Layer                      │
-│          HTTP Controllers · Form Requests · Resources       │
-└───────────────────────────┬─────────────────────────────────┘
-                            │ Commands / Queries
-┌───────────────────────────▼─────────────────────────────────┐
-│                     Application Layer                       │
-│     Command Handlers · Query Handlers · DTOs · Results      │
-└──────────────┬────────────────────────┬─────────────────────┘
-               │ Domain model           │ Ports (interfaces)
-┌──────────────▼──────────────┐  ┌──────▼──────────────────────┐
-│        Domain Layer         │  │    Infrastructure Layer      │
-│  Aggregates · ValueObjects  │  │  Eloquent · InMemory · Clock │
-│  Events · Specifications    │  │  EventPublisher · UoW        │
-└─────────────────────────────┘  └─────────────────────────────┘
-```
+   git clone https://github.com/wparrado/php_template.git
+   cd php_template
 
-**Dependency rule**: arrows point inward only. Domain knows nothing of the other layers.
+2. Install PHP dependencies:
 
-## Quick Start
+   composer install
 
-### Memory mode (no database required)
+3. Create environment file and application key:
 
-```bash
-cp .env.example .env
-php artisan key:generate
-DB_BACKEND=memory php artisan serve
-```
+   cp .env.example .env
+   php artisan key:generate
 
-### PostgreSQL mode
+4. (Optional) If using the Eloquent backend, set DB_BACKEND=eloquent in .env and run migrations:
 
-```bash
-cp .env.example .env && php artisan key:generate
-DB_BACKEND=eloquent php artisan migrate
-php artisan serve
-```
+   DB_BACKEND=eloquent php artisan migrate
 
-### Docker (memory mode, no dependencies)
+5. Generate OpenAPI documentation (produces storage/api-docs/api-docs.json):
 
-```bash
-docker compose up app-memory
-```
+   php artisan openapi:generate
 
-### Docker with PostgreSQL
+6. Serve the application locally:
 
-```bash
-docker compose --profile postgres up
-```
+   php artisan serve --host=127.0.0.1 --port=8000
 
-## Requirements
+7. Open the API docs in your browser:
 
-- PHP 8.3+
-- Composer 2
-- PostgreSQL 15+ (for Eloquent backend only)
+   http://127.0.0.1:8000/api/documentation
 
-## Environment Variables
+Tests:
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DB_BACKEND` | `memory` | `memory` or `eloquent` |
-| `EVENT_PUBLISHER` | `sync` | `sync` or `outbox` |
-| `APP_KEY` | — | Laravel app key (run `artisan key:generate`) |
-| `DB_*` | — | Standard Laravel DB connection settings |
+- Run unit tests: composer test:unit
 
-## API Endpoints
-
-All endpoints are prefixed with `/api/v1/`.
-
-| Method | URI | Action |
-|--------|-----|--------|
-| `GET` | `/api/health` | Health check |
-| `GET` | `/api/v1/items` | List items (paginated) |
-| `POST` | `/api/v1/items` | Create item |
-| `GET` | `/api/v1/items/{id}` | Get item |
-| `PUT` | `/api/v1/items/{id}` | Update item |
-| `DELETE` | `/api/v1/items/{id}` | Delete item |
-| `GET` | `/api/v1/categories` | List categories |
-| `POST` | `/api/v1/categories` | Create category |
-| `GET` | `/api/v1/categories/{id}` | Get category |
-| `PUT` | `/api/v1/categories/{id}` | Update category |
-| `DELETE` | `/api/v1/categories/{id}` | Delete category |
-
-## Development
-
-### Quality toolchain
-
-```bash
-# Format code
-composer lint
-
-# Check formatting (no changes)
-composer lint:check
-
-# Static analysis (PHPStan level 9 + Larastan)
-composer stan
-
-# Run all tests
-composer test
-
-# Run unit tests only
-composer test:unit
-
-# Check layer architecture
-composer deptrac
-
-# PHPArkitect rules
-composer arkitect
-```
-
-### Install git hooks
-
-```bash
-vendor/bin/captainhook install
-```
-
-Hooks enforce: `pint` + `stan` on pre-commit, `test:unit` + `deptrac` on pre-push.
-
-## Testing
-
-Tests use **Pest PHP** and are split into three groups:
-
-| Group | Command | Database needed? |
-|-------|---------|-----------------|
-| Unit | `composer test:unit` | ❌ No (InMemory) |
-| Integration | `vendor/bin/pest tests/Integration` | ❌ No (InMemory) |
-| Architecture | `vendor/bin/pest tests/Architecture` | ❌ No |
-
-### Adding a new backend to contract tests
-
-Open `tests/Integration/Infrastructure/Persistence/ItemRepositoryContractTest.php` and add your implementation to the `dataset`:
-
-```php
-dataset('item repositories', [
-    'InMemory' => fn () => new InMemoryItemRepository(),
-    'Eloquent' => fn () => new EloquentItemRepository(),  // add here
-]);
-```
-
-## Project Structure
-
-```
-src/
-├── Domain/          # Pure PHP — zero framework deps
-│   ├── Model/
-│   │   ├── Entity.php
-│   │   ├── AggregateRoot.php
-│   │   ├── ValueObject.php
-│   │   └── Example/
-│   │       ├── Item.php
-│   │       ├── Category.php
-│   │       ├── Events/
-│   │       └── ValueObjects/
-│   ├── Events/
-│   ├── Exceptions/
-│   ├── Ports/
-│   └── Specifications/
-├── Application/     # Use cases, handlers, DTOs
-│   ├── Commands/
-│   ├── Queries/
-│   ├── Handlers/
-│   ├── DTOs/
-│   ├── Mappers/
-│   ├── Ports/
-│   ├── Result/
-│   └── Services/
-├── Infrastructure/  # Framework/DB/messaging adapters
-│   ├── Clock/
-│   ├── Events/
-│   ├── Persistence/
-│   │   ├── Eloquent/
-│   │   └── InMemory/
-│   └── Providers/   # ← Composition Root
-└── Presentation/    # HTTP controllers, resources, middleware
-    └── Http/
-        ├── Controllers/
-        ├── Middleware/
-        └── Requests/
-```
-
-## Adding a New Aggregate
-
-1. **Domain**: Create `src/Domain/Model/YourThing/YourThing.php` aggregate + value objects + events
-2. **Ports**: Add `YourThingRepositoryInterface` in `src/Domain/Ports/Outbound/`
-3. **Application**: Commands, Queries, Handlers, DTO, Mapper
-4. **Infrastructure**: InMemory + Eloquent repository implementations
-5. **Presentation**: Controller, FormRequests, ApiResource
-6. **Wire**: Register bindings in `AppServiceProvider`
-7. **Test**: Unit tests for domain + handler; add to contract dataset
-
-See `ARCHITECTURE.md` for deep-dive.
-
-## API Documentation (Swagger)
-
-This project includes OpenAPI documentation generated with zircote/swagger-php. To generate and view docs locally:
-
-```bash
-# install dependencies
-composer install
-# generate docs (uses zircote/swagger-php)
-php artisan openapi:generate
-# serve the app
-php artisan serve --host=127.0.0.1 --port=8000
-# open docs at:
-http://127.0.0.1:8000/api/documentation
-```
-
-OpenAPI annotations live under `docs/` and `app/openapi.php`. Run `php artisan openapi:generate` to regenerate the JSON. If you need to change title/version, edit `docs/openapi.php` or `app/openapi.php`.
-
-Notes about local environment fixes:
-
-- Storage/cache directories were created (storage/framework/{views,sessions,cache}) to fix "Please provide a valid cache path." error.
-- The database config was adjusted to prefer the PHP 8.5 namespaced PDO constant to avoid E_DEPRECATED warnings on PHP 8.5+. No vendor upgrade was required.
-
-
+Notes:
+- After removing vendored dependencies from the repo, run composer install before first use.
+- The OpenAPI JSON is generated, not committed; run php artisan openapi:generate when you change annotations.

@@ -28,3 +28,16 @@ Thumbs.db
 composer.phar
 .ci-local-logs/
 storage/api-docs/
+patches/
+*.patch
+deptrac.yaml
+phpstan.neon
+phparkitect.php
+captainhook.json
+Dockerfile.ci
+vendor/
+run_config.php
+run_openapi.php
+run_scan.php
+scripts/
+bootstrap/cache/*
