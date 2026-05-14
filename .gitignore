@@ -24,3 +24,7 @@ Thumbs.db
 /coverage
 /.php-cs-fixer.cache
 /.captainhook
+.deptrac.cache
+composer.phar
+.ci-local-logs/
+storage/api-docs/
