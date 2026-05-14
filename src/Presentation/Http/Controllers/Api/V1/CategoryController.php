@@ -44,8 +44,8 @@ final class CategoryController extends Controller
     public function index(): JsonResponse
     {
         $result = $this->service->list(new ListCategoriesQuery(
-            limit: (int) request()->query('limit', 20),
-            offset: (int) request()->query('offset', 0),
+            limit: (int) (request()->query('limit') ?? 20),
+            offset: (int) (request()->query('offset') ?? 0),
         ));
 
         if ($result instanceof Failure) {
@@ -128,9 +128,10 @@ final class CategoryController extends Controller
     {
         $validated = $request->validated();
 
+        /** @var array{name: string, description?: string|null} $validated */
         $result = $this->service->create(new CreateCategoryCommand(
-            name: (string) $validated['name'],
-            description: isset($validated['description']) ? (string) $validated['description'] : null,
+            name: $validated['name'],
+            description: $validated['description'] ?? null,
         ));
 
         if ($result instanceof Failure) {
@@ -173,10 +174,11 @@ final class CategoryController extends Controller
     {
         $validated = $request->validated();
 
+        /** @var array{name: string, description?: string|null} $validated */
         $result = $this->service->update(new UpdateCategoryCommand(
             categoryId: $id,
-            name: (string) $validated['name'],
-            description: isset($validated['description']) ? (string) $validated['description'] : null,
+            name: $validated['name'],
+            description: $validated['description'] ?? null,
         ));
 
         if ($result instanceof Failure) {

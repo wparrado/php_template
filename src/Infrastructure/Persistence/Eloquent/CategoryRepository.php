@@ -38,11 +38,14 @@ final class CategoryRepository implements CategoryRepositoryInterface
      */
     public function findAll(int $limit = 20, int $offset = 0): array
     {
-        return CategoryModel::query()
+        /** @var \Illuminate\Database\Eloquent\Collection<int, CategoryModel> $models */
+        $models = CategoryModel::query()
             ->orderBy('created_at', 'desc')
             ->limit($limit)
             ->offset($offset)
-            ->get()
+            ->get();
+
+        return $models
             ->map(fn (CategoryModel $model) => $this->toDomain($model))
             ->all();
     }
@@ -60,11 +63,11 @@ final class CategoryRepository implements CategoryRepositoryInterface
     private function toDomain(CategoryModel $model): Category
     {
         return Category::reconstitute(
-            id: (string) $model->getAttribute('id'),
-            name: (string) $model->getAttribute('name'),
-            description: $model->getAttribute('description') !== null ? (string) $model->getAttribute('description') : null,
-            createdAt: new \DateTimeImmutable((string) $model->getAttribute('created_at')),
-            updatedAt: new \DateTimeImmutable((string) $model->getAttribute('updated_at')),
+            id: $model->id,
+            name: $model->name,
+            description: $model->description,
+            createdAt: new \DateTimeImmutable($model->created_at->toDateTimeString()),
+            updatedAt: new \DateTimeImmutable($model->updated_at->toDateTimeString()),
         );
     }
 }

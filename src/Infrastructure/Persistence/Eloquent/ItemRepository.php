@@ -42,12 +42,15 @@ final class ItemRepository implements ItemRepositoryInterface
      */
     public function findAll(int $limit = 20, int $offset = 0): array
     {
-        return ItemModel::query()
+        /** @var \Illuminate\Database\Eloquent\Collection<int, ItemModel> $models */
+        $models = ItemModel::query()
             ->where('is_deleted', false)
             ->orderBy('created_at', 'desc')
             ->limit($limit)
             ->offset($offset)
-            ->get()
+            ->get();
+
+        return $models
             ->map(fn (ItemModel $model) => $this->toDomain($model))
             ->all();
     }
@@ -65,15 +68,15 @@ final class ItemRepository implements ItemRepositoryInterface
     private function toDomain(ItemModel $model): Item
     {
         return Item::reconstitute(
-            id: (string) $model->getAttribute('id'),
-            name: (string) $model->getAttribute('name'),
-            price: (float) $model->getAttribute('price'),
-            currency: (string) $model->getAttribute('currency'),
-            description: $model->getAttribute('description') !== null ? (string) $model->getAttribute('description') : null,
-            categoryId: $model->getAttribute('category_id') !== null ? (string) $model->getAttribute('category_id') : null,
-            createdAt: new \DateTimeImmutable((string) $model->getAttribute('created_at')),
-            updatedAt: new \DateTimeImmutable((string) $model->getAttribute('updated_at')),
-            deleted: (bool) $model->getAttribute('is_deleted'),
+            id: $model->id,
+            name: $model->name,
+            price: $model->price,
+            currency: $model->currency,
+            description: $model->description,
+            categoryId: $model->category_id,
+            createdAt: new \DateTimeImmutable($model->created_at->toDateTimeString()),
+            updatedAt: new \DateTimeImmutable($model->updated_at->toDateTimeString()),
+            deleted: $model->is_deleted,
         );
     }
 }

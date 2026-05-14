@@ -47,8 +47,8 @@ final class ItemController extends Controller
     public function index(): JsonResponse
     {
         $result = $this->service->list(new ListItemsQuery(
-            limit: (int) request()->query('limit', 20),
-            offset: (int) request()->query('offset', 0),
+            limit: (int) (request()->query('limit') ?? 20),
+            offset: (int) (request()->query('offset') ?? 0),
         ));
 
         if ($result instanceof Failure) {
@@ -140,12 +140,13 @@ final class ItemController extends Controller
     {
         $validated = $request->validated();
 
+        /** @var array{name: string, price: float|int, currency?: string, description?: string|null, category_id?: string|null} $validated */
         $result = $this->service->create(new CreateItemCommand(
-            name: (string) $validated['name'],
+            name: $validated['name'],
             price: (float) $validated['price'],
-            currency: (string) ($validated['currency'] ?? 'USD'),
-            description: isset($validated['description']) ? (string) $validated['description'] : null,
-            categoryId: isset($validated['category_id']) ? (string) $validated['category_id'] : null,
+            currency: $validated['currency'] ?? 'USD',
+            description: $validated['description'] ?? null,
+            categoryId: $validated['category_id'] ?? null,
         ));
 
         if ($result instanceof Failure) {
@@ -194,13 +195,14 @@ final class ItemController extends Controller
     {
         $validated = $request->validated();
 
+        /** @var array{name: string, price: float|int, currency?: string, description?: string|null, category_id?: string|null} $validated */
         $result = $this->service->update(new UpdateItemCommand(
             itemId: $id,
-            name: (string) $validated['name'],
+            name: $validated['name'],
             price: (float) $validated['price'],
-            currency: (string) ($validated['currency'] ?? 'USD'),
-            description: isset($validated['description']) ? (string) $validated['description'] : null,
-            categoryId: isset($validated['category_id']) ? (string) $validated['category_id'] : null,
+            currency: $validated['currency'] ?? 'USD',
+            description: $validated['description'] ?? null,
+            categoryId: $validated['category_id'] ?? null,
         ));
 
         if ($result instanceof Failure) {

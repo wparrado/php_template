@@ -1,41 +1,63 @@
-# PHP Laravel 11 — Hexagonal Architecture Template
+# PHP Laravel Hexagonal Template
 
-Minimal steps to run the project locally:
+A minimal, production-ready Laravel 11 template demonstrating **Hexagonal Architecture** (Ports & Adapters) with CQRS and DDD patterns.
 
-1. Clone the repository:
+## Architecture
 
-   git clone https://github.com/wparrado/php_template.git
-   cd php_template
+```
+┌─────────────────────────────────────────────────────────┐
+│  Presentation  (HTTP adapters)                          │
+│  Controllers · Form Requests · API Resources · Middleware│
+│                        │ depends on                     │
+├─────────────────────────────────────────────────────────┤
+│  Application  (use cases — CQRS)                        │
+│  Commands · Queries · Handlers · DTOs · Result<T>       │
+│                        │ depends on                     │
+├─────────────────────────────────────────────────────────┤
+│  Domain  ◆ Pure PHP — zero framework dependencies       │
+│  Aggregates · Value Objects · Ports · Domain Events     │
+│                        △ implemented by                 │
+├─────────────────────────────────────────────────────────┤
+│  Infrastructure  (secondary adapters)                   │
+│  Eloquent Repos · InMemory Repos · Event Publishers     │
+│  Clock · AppServiceProvider (composition root)          │
+└─────────────────────────────────────────────────────────┘
+```
 
-2. Install PHP dependencies:
+**Dependency rule:** arrows point inward. Domain knows nothing about any other layer.
+Infrastructure implements Domain ports; it never leaks into Application or Presentation.
 
-   composer install
+| Layer | Namespace | Responsibility |
+|-------|-----------|----------------|
+| Domain | `src/Domain/` | Business rules, entities, value objects, ports (interfaces) |
+| Application | `src/Application/` | Use-case handlers, commands/queries, DTOs, Result type |
+| Infrastructure | `src/Infrastructure/` | Adapters — Eloquent, InMemory, events, clock |
+| Presentation | `src/Presentation/` | HTTP controllers, form requests, API resources |
 
-3. Create environment file and application key:
+## Quick start
 
-   cp .env.example .env
-   php artisan key:generate
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate          # optional — uses in-memory backend by default
+php artisan openapi:generate
+php artisan serve
+```
 
-4. (Optional) If using the Eloquent backend, set DB_BACKEND=eloquent in .env and run migrations:
+Open **http://localhost:8000/api/documentation** for the Swagger UI.
 
-   DB_BACKEND=eloquent php artisan migrate
+## Running without a database
 
-5. Generate OpenAPI documentation (produces storage/api-docs/api-docs.json):
+Set `DB_BACKEND=memory` in `.env` (default). No database setup required.
 
-   php artisan openapi:generate
+## Commands
 
-6. Serve the application locally:
-
-   php artisan serve --host=127.0.0.1 --port=8000
-
-7. Open the API docs in your browser:
-
-   http://127.0.0.1:8000/api/documentation
-
-Tests:
-
-- Run unit tests: composer test:unit
-
-Notes:
-- After removing vendored dependencies from the repo, run composer install before first use.
-- The OpenAPI JSON is generated, not committed; run php artisan openapi:generate when you change annotations.
+```bash
+composer lint              # Laravel Pint auto-format
+composer stan              # PHPStan level 9
+composer test              # Full Pest suite
+composer test:unit         # Unit tests only
+composer test:arch         # Architecture boundary tests
+composer generate:openapi  # Regenerate OpenAPI JSON
+```

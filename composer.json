@@ -5,7 +5,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "doctrine/annotations": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "ramsey/uuid": "^4.7",
@@ -15,12 +14,8 @@
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
         "phpstan/phpstan": "^2.0",
-        "nunomaduro/larastan": "^3.0",
+        "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
-        "deptrac/deptrac": "^2.0",
-        "phparkitect/phparkitect": "^1.0",
-        "captainhook/captainhook": "^5.0",
-        "captainhook/plugin-composer": "^5.0",
         "mockery/mockery": "^1.6"
     },
     "autoload": {
@@ -44,18 +39,13 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
-        "post-install-cmd": [
-            "CaptainHook\\App\\Hook\\Runner::install"
-        ],
         "lint": "vendor/bin/pint",
         "lint:check": "vendor/bin/pint --test",
-        "stan": "vendor/bin/phpstan analyse --memory-limit=512M",
+        "stan": "vendor/bin/phpstan analyse --memory-limit=512M --level=9 src",
         "test": "vendor/bin/pest",
         "test:unit": "vendor/bin/pest --group=unit",
         "test:integration": "vendor/bin/pest --group=integration",
         "test:arch": "vendor/bin/pest --group=architecture",
-        "deptrac": "vendor/bin/deptrac analyse",
-        "arkitect": "vendor/bin/phparkitect check",
         "generate:openapi": "php artisan openapi:generate"
     },
     "config": {
@@ -63,8 +53,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "captainhook/plugin-composer": true
+            "pestphp/pest-plugin": true
         },
         "platform": {
             "php": "8.3.31"

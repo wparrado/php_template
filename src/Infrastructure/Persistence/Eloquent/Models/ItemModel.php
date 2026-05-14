@@ -6,6 +6,17 @@ namespace Infrastructure\Persistence\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $id
+ * @property string $name
+ * @property float $price
+ * @property string $currency
+ * @property string|null $description
+ * @property string|null $category_id
+ * @property bool $is_deleted
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ */
 final class ItemModel extends Model
 {
     protected $table = 'items';
