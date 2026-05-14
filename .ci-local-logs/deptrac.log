@@ -1,0 +1,7 @@
+
+                                         
+  The "--config" option does not exist.  
+                                         
+
+analyse [-f|--formatter [FORMATTER]] [-o|--output [OUTPUT]] [--no-progress] [--fail-on-uncovered] [--report-uncovered] [--report-skipped]
+

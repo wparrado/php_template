@@ -195,3 +195,27 @@ src/
 7. **Test**: Unit tests for domain + handler; add to contract dataset
 
 See `ARCHITECTURE.md` for deep-dive.
+
+## API Documentation (Swagger)
+
+This project includes OpenAPI documentation generated with zircote/swagger-php. To generate and view docs locally:
+
+```bash
+# install dependencies
+composer install
+# generate docs (uses zircote/swagger-php)
+php artisan openapi:generate
+# serve the app
+php artisan serve --host=127.0.0.1 --port=8000
+# open docs at:
+http://127.0.0.1:8000/api/documentation
+```
+
+OpenAPI annotations live under `docs/` and `app/openapi.php`. Run `php artisan openapi:generate` to regenerate the JSON. If you need to change title/version, edit `docs/openapi.php` or `app/openapi.php`.
+
+Notes about local environment fixes:
+
+- Storage/cache directories were created (storage/framework/{views,sessions,cache}) to fix "Please provide a valid cache path." error.
+- The database config was adjusted to prefer the PHP 8.5 namespaced PDO constant to avoid E_DEPRECATED warnings on PHP 8.5+. No vendor upgrade was required.
+
+

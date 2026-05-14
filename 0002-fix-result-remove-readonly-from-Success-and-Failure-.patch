@@ -1,0 +1,40 @@
+From 7f12dadde5d19763b083505c84a6cf8c604d0ffc Mon Sep 17 00:00:00 2001
+From: wparrado <223556219+Copilot@users.noreply.github.com>
+Date: Mon, 11 May 2026 19:53:31 -0500
+Subject: [PATCH 2/3] fix(result): remove readonly from Success and Failure to
+ match Result
+
+---
+ src/Application/Result/Failure.php | 2 +-
+ src/Application/Result/Success.php | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/Application/Result/Failure.php b/src/Application/Result/Failure.php
+index ff23ae4..dfdd370 100644
+--- a/src/Application/Result/Failure.php
++++ b/src/Application/Result/Failure.php
+@@ -4,7 +4,7 @@ declare(strict_types=1);
+ 
+ namespace Application\Result;
+ 
+-final readonly class Failure extends Result
++final class Failure extends Result
+ {
+     public function __construct(
+         public readonly \Throwable $error,
+diff --git a/src/Application/Result/Success.php b/src/Application/Result/Success.php
+index 9816392..dfe0967 100644
+--- a/src/Application/Result/Success.php
++++ b/src/Application/Result/Success.php
+@@ -4,7 +4,7 @@ declare(strict_types=1);
+ 
+ namespace Application\Result;
+ 
+-final readonly class Success extends Result
++final class Success extends Result
+ {
+     public function __construct(
+         public readonly mixed $value,
+-- 
+2.41.0
+

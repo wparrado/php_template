@@ -1,0 +1,27 @@
+  0/76 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[1G[2K 76/76 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ ------------------------------------------------------------------------------------------------- 
+  Line   Application/Result/Failure.php                                                                   
+ ------ ------------------------------------------------------------------------------------------------- 
+  :7     Non-readonly class Application\Result\Failure extends readonly class Application\Result\Result.  
+         🪪  class.nonReadOnly (non-ignorable)                                                            
+ ------ ------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------------------------------------------- 
+  Line   Application/Result/Success.php                                                                   
+ ------ ------------------------------------------------------------------------------------------------- 
+  :7     Non-readonly class Application\Result\Success extends readonly class Application\Result\Result.  
+         🪪  class.nonReadOnly (non-ignorable)                                                            
+ ------ ------------------------------------------------------------------------------------------------- 
+
+ -- ---------------------------------------------------------------------------------------------------------------- 
+     Error                                                                                                           
+ -- ---------------------------------------------------------------------------------------------------------------- 
+     Ignored error pattern #Call to an undefined method Illuminate\\Database\\Eloquent\\Builder# was not matched in  
+     reported errors.                                                                                                
+     Ignored error pattern #Access to an undefined property PHPUnit\\\\Framework\\\\TestCase# was not matched in     
+     reported errors.                                                                                                
+ -- ---------------------------------------------------------------------------------------------------------------- 
+
+ [ERROR] Found 4 errors                                                                                                 
+

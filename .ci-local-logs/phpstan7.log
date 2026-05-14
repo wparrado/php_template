@@ -1,0 +1,94 @@
+  0/76 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%[1G[2K 76/76 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ ------ ------------------------------------------------------------------------------------------------- 
+  Line   Application/Result/Success.php                                                                   
+ ------ ------------------------------------------------------------------------------------------------- 
+  :7     Readonly class Application\Result\Success extends non-readonly class Application\Result\Result.  
+         🪪  class.readOnly (non-ignorable)                                                               
+ ------ ------------------------------------------------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------ 
+  Line   Infrastructure/Persistence/Eloquent/CategoryRepository.php  
+ ------ ------------------------------------------------------------ 
+  :63    Cannot cast mixed to string.                                
+         🪪  cast.string                                             
+  :64    Cannot cast mixed to string.                                
+         🪪  cast.string                                             
+  :65    Cannot cast mixed to string.                                
+         🪪  cast.string                                             
+  :66    Cannot cast mixed to string.                                
+         🪪  cast.string                                             
+  :67    Cannot cast mixed to string.                                
+         🪪  cast.string                                             
+ ------ ------------------------------------------------------------ 
+
+ ------ -------------------------------------------------------- 
+  Line   Infrastructure/Persistence/Eloquent/ItemRepository.php  
+ ------ -------------------------------------------------------- 
+  :68    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :69    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :70    Cannot cast mixed to float.                             
+         🪪  cast.double                                         
+  :71    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :72    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :73    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :74    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+  :75    Cannot cast mixed to string.                            
+         🪪  cast.string                                         
+ ------ -------------------------------------------------------- 
+
+ ------ ------------------------------------------------------------- 
+  Line   Presentation/Http/Controllers/Api/V1/CategoryController.php  
+ ------ ------------------------------------------------------------- 
+  :75    Cannot cast mixed to string.                                 
+         🪪  cast.string                                              
+  :76    Cannot cast mixed to string.                                 
+         🪪  cast.string                                              
+  :95    Cannot cast mixed to string.                                 
+         🪪  cast.string                                              
+  :96    Cannot cast mixed to string.                                 
+         🪪  cast.string                                              
+ ------ ------------------------------------------------------------- 
+
+ ------ --------------------------------------------------------- 
+  Line   Presentation/Http/Controllers/Api/V1/ItemController.php  
+ ------ --------------------------------------------------------- 
+  :75    Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :76    Cannot cast mixed to float.                              
+         🪪  cast.double                                          
+  :77    Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :78    Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :79    Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :98    Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :99    Cannot cast mixed to float.                              
+         🪪  cast.double                                          
+  :100   Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :101   Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+  :102   Cannot cast mixed to string.                             
+         🪪  cast.string                                          
+ ------ --------------------------------------------------------- 
+
+ -- ---------------------------------------------------------------------------------------------------------------- 
+     Error                                                                                                           
+ -- ---------------------------------------------------------------------------------------------------------------- 
+     Ignored error pattern #Call to an undefined method Illuminate\\Database\\Eloquent\\Builder# was not matched in  
+     reported errors.                                                                                                
+     Ignored error pattern #Access to an undefined property PHPUnit\\\\Framework\\\\TestCase# was not matched in     
+     reported errors.                                                                                                
+ -- ---------------------------------------------------------------------------------------------------------------- 
+
+ [ERROR] Found 30 errors                                                                                                
+

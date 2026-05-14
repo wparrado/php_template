@@ -1,0 +1,9 @@
+  0/78 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0%
+ 78/78 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+ [ERROR] Analysis finished with an Exception.                                                                           
+                                                                                                                        
+         Invalid collector definition.                                                                                  
+                                                                                                                        
+         ClassNameRegexCollector needs the regex configuration.                                                         
+

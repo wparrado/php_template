@@ -18,6 +18,7 @@ use Illuminate\Routing\Controller;
 use Presentation\Http\Requests\Category\CreateCategoryRequest;
 use Presentation\Http\Requests\Category\UpdateCategoryRequest;
 use Presentation\Http\Resources\CategoryResource;
+use OpenApi\Attributes as OA;
 
 final class CategoryController extends Controller
 {
@@ -25,6 +26,21 @@ final class CategoryController extends Controller
         private readonly CategoryApplicationServiceInterface $service,
     ) {}
 
+    #[OA\Get(
+        path: '/api/v1/categories',
+        summary: 'List categories',
+        tags: ['Categories'],
+        responses: [new OA\Response(response: 200, description: 'Successful response', content: new OA\JsonContent(type: 'array', items: new OA\Items(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        )))]
+    )]
     public function index(): JsonResponse
     {
         $result = $this->service->list(new ListCategoriesQuery(
@@ -53,6 +69,22 @@ final class CategoryController extends Controller
         ]);
     }
 
+    #[OA\Get(
+        path: '/api/v1/categories/{id}',
+        summary: 'Get category',
+        tags: ['Categories'],
+        parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'string'))],
+        responses: [new OA\Response(response: 200, description: 'Successful response', content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        ))]
+    )]
     public function show(string $id): JsonResponse
     {
         $result = $this->service->getById(new GetCategoryQuery(categoryId: $id));
@@ -67,6 +99,31 @@ final class CategoryController extends Controller
         return new JsonResponse(['data' => (new CategoryResource($dto))->toArray(request())]);
     }
 
+    #[OA\Post(
+        path: '/api/v1/categories',
+        summary: 'Create category',
+        tags: ['Categories'],
+        requestBody: new OA\RequestBody(content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        )),
+        responses: [new OA\Response(response: 201, description: 'Created', content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        ))]
+    )]
     public function store(CreateCategoryRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -86,6 +143,32 @@ final class CategoryController extends Controller
         return new JsonResponse(['data' => (new CategoryResource($dto))->toArray(request())], 201);
     }
 
+    #[OA\Put(
+        path: '/api/v1/categories/{id}',
+        summary: 'Update category',
+        tags: ['Categories'],
+        parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'string'))],
+        requestBody: new OA\RequestBody(content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        )),
+        responses: [new OA\Response(response: 200, description: 'Updated', content: new OA\JsonContent(
+            type: 'object',
+            properties: [
+                new OA\Property(property: 'id', type: 'string'),
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'description', type: 'string', nullable: true),
+                new OA\Property(property: 'createdAt', type: 'string', format: 'date-time'),
+                new OA\Property(property: 'updatedAt', type: 'string', format: 'date-time'),
+            ]
+        ))]
+    )]
     public function update(UpdateCategoryRequest $request, string $id): JsonResponse
     {
         $validated = $request->validated();
@@ -106,6 +189,13 @@ final class CategoryController extends Controller
         return new JsonResponse(['data' => (new CategoryResource($dto))->toArray(request())]);
     }
 
+    #[OA\Delete(
+        path: '/api/v1/categories/{id}',
+        summary: 'Delete category',
+        tags: ['Categories'],
+        parameters: [new OA\Parameter(name: 'id', in: 'path', required: true, schema: new OA\Schema(type: 'string'))],
+        responses: [new OA\Response(response: 204, description: 'No Content')]
+    )]
     public function destroy(string $id): JsonResponse
     {
         $result = $this->service->delete(new DeleteCategoryCommand(categoryId: $id));

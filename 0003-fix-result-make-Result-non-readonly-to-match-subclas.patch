@@ -1,0 +1,25 @@
+From 0d674bc73e0238d82974ed2437df8b80ddd813c2 Mon Sep 17 00:00:00 2001
+From: wparrado <223556219+Copilot@users.noreply.github.com>
+Date: Mon, 11 May 2026 19:53:59 -0500
+Subject: [PATCH 3/3] fix(result): make Result non-readonly to match subclasses
+
+---
+ src/Application/Result/Result.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/Application/Result/Result.php b/src/Application/Result/Result.php
+index cc149b7..1770ddd 100644
+--- a/src/Application/Result/Result.php
++++ b/src/Application/Result/Result.php
+@@ -4,7 +4,7 @@ declare(strict_types=1);
+ 
+ namespace Application\Result;
+ 
+-abstract readonly class Result
++abstract class Result
+ {
+     abstract public function isSuccess(): bool;
+ 
+-- 
+2.41.0
+

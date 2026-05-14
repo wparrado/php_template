@@ -5,9 +5,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "doctrine/annotations": "^2.0",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "zircote/swagger-php": "^6.1"
     },
     "require-dev": {
         "pestphp/pest": "^3.0",
@@ -53,7 +55,8 @@
         "test:integration": "vendor/bin/pest --group=integration",
         "test:arch": "vendor/bin/pest --group=architecture",
         "deptrac": "vendor/bin/deptrac analyse",
-        "arkitect": "vendor/bin/phparkitect check"
+        "arkitect": "vendor/bin/phparkitect check",
+        "generate:openapi": "php artisan openapi:generate"
     },
     "config": {
         "optimize-autoloader": true,
