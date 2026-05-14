@@ -33,7 +33,6 @@ patches/
 deptrac.yaml
 phpstan.neon
 phparkitect.php
-captainhook.json
 Dockerfile.ci
 vendor/
 run_config.php

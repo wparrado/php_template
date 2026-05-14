@@ -16,6 +16,8 @@
         "phpstan/phpstan": "^2.0",
         "larastan/larastan": "^3.0",
         "laravel/pint": "^1.0",
+        "captainhook/captainhook": "^5.0",
+        "captainhook/plugin-composer": "^5.0",
         "mockery/mockery": "^1.6"
     },
     "autoload": {
@@ -39,6 +41,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
+        "post-install-cmd": [
+            "CaptainHook\\App\\Hook\\Runner::install"
+        ],
         "lint": "vendor/bin/pint",
         "lint:check": "vendor/bin/pint --test",
         "stan": "vendor/bin/phpstan analyse --memory-limit=512M --level=9 src",
@@ -53,7 +58,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "captainhook/plugin-composer": true
         },
         "platform": {
             "php": "8.3.31"
