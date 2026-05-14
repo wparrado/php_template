@@ -11,6 +11,7 @@ Route::get('/', function () {
 // Swagger UI (lightweight, uses swagger-ui CDN)
 Route::get('/api/documentation', function () {
     $url = url('/api/docs.json');
+
     return view('swagger-ui', ['url' => $url]);
 });
 

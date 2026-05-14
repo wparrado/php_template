@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Pdo\Mysql;
 
 // Build safe PDO options for MySQL/MariaDB that avoid referencing deprecated
 // global PDO::MYSQL_ATTR_SSL_CA on PHP 8.5+. Prefer the namespaced constant
@@ -10,7 +11,7 @@ if (extension_loaded('pdo_mysql')) {
     // prefer global PDO constant if defined (older PHP), otherwise use namespaced constant (PHP 8.5+)
     // Prefer the namespaced constant on PHP 8.5+ to avoid deprecation notices
     if (defined('\\Pdo\\Mysql::ATTR_SSL_CA')) {
-        $key = \Pdo\Mysql::ATTR_SSL_CA;
+        $key = Mysql::ATTR_SSL_CA;
     } elseif (defined('PDO::MYSQL_ATTR_SSL_CA')) {
         $key = PDO::MYSQL_ATTR_SSL_CA;
     } else {
@@ -19,7 +20,7 @@ if (extension_loaded('pdo_mysql')) {
 
     if ($key !== null) {
         $value = env('MYSQL_ATTR_SSL_CA');
-        if (!empty($value)) {
+        if (! empty($value)) {
             $mysqlOptions[$key] = $value;
         }
     }

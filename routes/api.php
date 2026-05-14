@@ -17,6 +17,7 @@ Route::get('/health', fn () => response()->json(['status' => 'ok', 'timestamp' =
 Route::get('/documentation', function () {
     // Use relative URL to avoid cross-origin issues when serving UI from different hosts (localhost vs 127.0.0.1)
     $url = '/api/docs.json';
+
     return view('swagger-ui', ['url' => $url]);
 });
 

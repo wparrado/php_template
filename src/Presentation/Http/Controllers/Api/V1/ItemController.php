@@ -15,10 +15,10 @@ use Application\Queries\Item\ListItemsQuery;
 use Application\Result\Failure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use OpenApi\Attributes as OA;
 use Presentation\Http\Requests\Item\CreateItemRequest;
 use Presentation\Http\Requests\Item\UpdateItemRequest;
 use Presentation\Http\Resources\ItemResource;
-use OpenApi\Attributes as OA;
 
 final class ItemController extends Controller
 {

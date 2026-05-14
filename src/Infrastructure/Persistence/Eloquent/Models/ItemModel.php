@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infrastructure\Persistence\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * @property string $id
@@ -14,8 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $description
  * @property string|null $category_id
  * @property bool $is_deleted
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 final class ItemModel extends Model
 {

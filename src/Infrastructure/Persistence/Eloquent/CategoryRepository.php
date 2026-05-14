@@ -6,6 +6,7 @@ namespace Infrastructure\Persistence\Eloquent;
 
 use Domain\Model\Example\Category;
 use Domain\Ports\Outbound\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Infrastructure\Persistence\Eloquent\Models\CategoryModel;
 
 final class CategoryRepository implements CategoryRepositoryInterface
@@ -38,7 +39,7 @@ final class CategoryRepository implements CategoryRepositoryInterface
      */
     public function findAll(int $limit = 20, int $offset = 0): array
     {
-        /** @var \Illuminate\Database\Eloquent\Collection<int, CategoryModel> $models */
+        /** @var Collection<int, CategoryModel> $models */
         $models = CategoryModel::query()
             ->orderBy('created_at', 'desc')
             ->limit($limit)

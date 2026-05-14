@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * PHPStan test stubs to declare dynamic properties used by Pest closures.
  * This file is only used by PHPStan via the 'stubFiles' configuration.

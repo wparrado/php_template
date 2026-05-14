@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console;
 
+use App\Console\Commands\GenerateOpenApi;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array<int, class-string>
      */
     protected $commands = [
-        \App\Console\Commands\GenerateOpenApi::class,
+        GenerateOpenApi::class,
     ];
 
     /**

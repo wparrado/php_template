@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use OpenApi\Attributes as OA;
 
 #[OA\Components(
@@ -7,7 +9,7 @@ use OpenApi\Attributes as OA;
         new OA\Schema(
             schema: 'Category',
             type: 'object',
-            required: ['id','name'],
+            required: ['id', 'name'],
             properties: [
                 new OA\Property(property: 'id', type: 'string'),
                 new OA\Property(property: 'name', type: 'string'),
@@ -16,7 +18,7 @@ use OpenApi\Attributes as OA;
         new OA\Schema(
             schema: 'Item',
             type: 'object',
-            required: ['id','name'],
+            required: ['id', 'name'],
             properties: [
                 new OA\Property(property: 'id', type: 'integer', format: 'int64'),
                 new OA\Property(property: 'name', type: 'string'),
@@ -25,4 +27,3 @@ use OpenApi\Attributes as OA;
     ]
 )]
 class OpenApiComponents {}
-

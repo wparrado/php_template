@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use OpenApi\Generator;
+use Psr\Log\NullLogger;
 
 class GenerateOpenApi extends Command
 {
@@ -27,7 +30,7 @@ class GenerateOpenApi extends Command
         $this->info('Scanning: ' . implode(', ', $paths));
 
         // Use NullLogger to avoid trigger_error -> ErrorException escalation from DefaultLogger
-        $generator = new \OpenApi\Generator(new \Psr\Log\NullLogger());
+        $generator = new Generator(new NullLogger);
         $openapi = $generator->generate($paths, null, true);
 
         if ($openapi) {
@@ -60,10 +63,12 @@ class GenerateOpenApi extends Command
             }
 
             $this->info("Wrote {$target}");
+
             return 0;
         }
 
         $this->error('No OpenAPI generated');
+
         return 1;
     }
 }

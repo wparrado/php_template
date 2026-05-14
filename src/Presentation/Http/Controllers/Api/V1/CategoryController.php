@@ -15,10 +15,10 @@ use Application\Queries\Category\ListCategoriesQuery;
 use Application\Result\Failure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use OpenApi\Attributes as OA;
 use Presentation\Http\Requests\Category\CreateCategoryRequest;
 use Presentation\Http\Requests\Category\UpdateCategoryRequest;
 use Presentation\Http\Resources\CategoryResource;
-use OpenApi\Attributes as OA;
 
 final class CategoryController extends Controller
 {

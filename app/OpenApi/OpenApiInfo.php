@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\OpenApi;
 
 use OpenApi\Attributes as OA;
@@ -10,6 +12,4 @@ use OpenApi\Attributes as OA;
     description: 'Hexagonal Laravel template API',
     contact: new OA\Contact(name: 'Maintainer', email: 'dev@example.com')
 )]
-class OpenApiInfo
-{
-}
+class OpenApiInfo {}

@@ -9,7 +9,7 @@ use OpenApi\Attributes as OA;
 #[OA\Schema(
     schema: 'Item',
     type: 'object',
-    required: ['id','name'],
+    required: ['id', 'name'],
     properties: [
         new OA\Property(property: 'id', type: 'integer', format: 'int64'),
         new OA\Property(property: 'name', type: 'string'),

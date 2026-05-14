@@ -6,6 +6,7 @@ namespace Infrastructure\Persistence\Eloquent;
 
 use Domain\Model\Example\Item;
 use Domain\Ports\Outbound\ItemRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Infrastructure\Persistence\Eloquent\Models\ItemModel;
 
 final class ItemRepository implements ItemRepositoryInterface
@@ -42,7 +43,7 @@ final class ItemRepository implements ItemRepositoryInterface
      */
     public function findAll(int $limit = 20, int $offset = 0): array
     {
-        /** @var \Illuminate\Database\Eloquent\Collection<int, ItemModel> $models */
+        /** @var Collection<int, ItemModel> $models */
         $models = ItemModel::query()
             ->where('is_deleted', false)
             ->orderBy('created_at', 'desc')
