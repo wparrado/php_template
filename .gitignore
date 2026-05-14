@@ -31,7 +31,6 @@ storage/api-docs/
 patches/
 *.patch
 deptrac.yaml
-phpstan.neon
 phparkitect.php
 Dockerfile.ci
 vendor/
