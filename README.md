@@ -4,28 +4,48 @@ A minimal, production-ready Laravel 11 template demonstrating **Hexagonal Archit
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  Presentation  (HTTP adapters)                          │
-│  Controllers · Form Requests · API Resources · Middleware│
-│                        │ depends on                     │
-├─────────────────────────────────────────────────────────┤
-│  Application  (use cases — CQRS)                        │
-│  Commands · Queries · Handlers · DTOs · Result<T>       │
-│                        │ depends on                     │
-├─────────────────────────────────────────────────────────┤
-│  Domain  ◆ Pure PHP — zero framework dependencies       │
-│  Aggregates · Value Objects · Ports · Domain Events     │
-│                        △ implemented by                 │
-├─────────────────────────────────────────────────────────┤
-│  Infrastructure  (secondary adapters)                   │
-│  Eloquent Repos · InMemory Repos · Event Publishers     │
-│  Clock · AppServiceProvider (composition root)          │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    subgraph Presentation["🌐 Presentation (HTTP Adapters)"]
+        C[Controllers]
+        FR[Form Requests]
+        AR[API Resources]
+        MW[Middleware]
+    end
+
+    subgraph Application["⚙️ Application (Use Cases — CQRS)"]
+        CMD[Commands]
+        QRY[Queries]
+        HDL[Handlers]
+        DTO[DTOs]
+        RES[Result&lt;T&gt;]
+    end
+
+    subgraph Domain["🧠 Domain (Core — Pure PHP)"]
+        AGG[Aggregates]
+        VO[Value Objects]
+        PRT[Ports / Interfaces]
+        EVT[Domain Events]
+    end
+
+    subgraph Infrastructure["🔧 Infrastructure (Secondary Adapters)"]
+        ELQ[Eloquent Repositories]
+        MEM[InMemory Repositories]
+        CLK[Clock]
+        SP[AppServiceProvider]
+    end
+
+    Presentation -->|depends on| Application
+    Application -->|depends on| Domain
+    Infrastructure -->|implements| Domain
+
+    style Domain fill:#fef9c3,stroke:#ca8a04,color:#000
+    style Application fill:#dbeafe,stroke:#2563eb,color:#000
+    style Presentation fill:#dcfce7,stroke:#16a34a,color:#000
+    style Infrastructure fill:#fce7f3,stroke:#db2777,color:#000
 ```
 
-**Dependency rule:** arrows point inward. Domain knows nothing about any other layer.
-Infrastructure implements Domain ports; it never leaks into Application or Presentation.
+> **Dependency rule:** arrows point inward only. `Domain` has zero framework dependencies — it knows nothing about Laravel, Eloquent, or HTTP. `Infrastructure` implements the `Domain` ports; it never leaks into `Application` or `Presentation`.
 
 | Layer | Namespace | Responsibility |
 |-------|-----------|----------------|
